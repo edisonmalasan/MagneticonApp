@@ -37,4 +37,24 @@ public class VolunteerDAO {
         return null;
     }
 
+    public boolean createVolunteer(Volunteer volunteer) {
+        String sql = "INSERT INTO Volunteer (volid, fname, lname, email, password, role) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, volunteer.getVolid());
+            statement.setString(2, volunteer.getFname());
+            statement.setString(3, volunteer.getLname());
+            statement.setString(4, volunteer.getEmail());
+            statement.setString(5, volunteer.getPassword());
+            statement.setString(6, volunteer.getRole());
+
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }
