@@ -4,6 +4,9 @@
  */
 package views.admin;
 
+import models.Volunteer;
+
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -162,7 +165,21 @@ public class AdminLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_textEmailFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String email = textEmail.getText();
+        String password = new String(jPasswordField1.getPassword());
+
+        if (email.isEmpty() || email.equals(placeholder)) {
+            JOptionPane.showMessageDialog(this, "Please enter your email", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your password", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Volunteer admin =
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

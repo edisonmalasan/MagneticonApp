@@ -7,6 +7,8 @@ public class Service {
     private String sstat;
     private String teamid;
 
+    public Service() {}
+
     public Service(String servid, String sname, String sdesc, String sstat, String teamid) {
         this.servid = servid;
         this.sname = sname;

@@ -15,6 +15,9 @@ public class Volunteer {
     private String volstat;
     private String role;
 
+    public Volunteer() {
+    }
+
     public Volunteer(String volid, String fname, String lname, String address, String phone, String email, String password, LocalDate birthday, String sex, String volstat, String role) {
         this.volid = volid;
         this.fname = fname;
