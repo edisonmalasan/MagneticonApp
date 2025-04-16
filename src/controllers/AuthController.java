@@ -12,14 +12,6 @@ public class AuthController {
     }
 
     public Volunteer login(String email, String password) {
-        if (email == null || email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email cannot be null or empty");
-        }
-
-        if (password == null || password.trim().isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be null or empty");
-        }
-
         Volunteer volunteer = volunteerDAO.authenticate(email, password);
 
         if (volunteer != null) {
@@ -56,6 +48,22 @@ public class AuthController {
         }
 
         return volunteerDAO.createVolunteer(volunteer);
+    }
+
+    public String authenticate(String email, String password) {
+        if (email == null || email.trim().isEmpty() ||
+                password == null || password.trim().isEmpty()) {
+            return null;
+        }
+
+        Volunteer volunteer = volunteerDAO.authenticate(email, password);
+
+        if (volunteer != null) {
+            SessionManager.setCurrentUser(volunteer);
+            return volunteer.getRole().toLowerCase();
+        }
+
+        return null;
     }
 
     public Volunteer getCurrentUser() {
