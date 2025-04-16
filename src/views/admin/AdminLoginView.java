@@ -5,6 +5,7 @@
 package views.admin;
 
 import models.Volunteer;
+import controllers.AuthController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.awt.*;
 public class AdminLoginView extends javax.swing.JFrame {
 
     String placeholder = "Enter email";
+    private AuthController authController = new AuthController();
     /**
      * Creates new form AdminLoginView
      */
@@ -166,20 +168,24 @@ public class AdminLoginView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String email = textEmail.getText();
-        String password = new String(jPasswordField1.getPassword());
+        String password = new String(jPasswordField1.getPassword()).trim();
 
-        if (email.isEmpty() || email.equals(placeholder)) {
-            JOptionPane.showMessageDialog(this, "Please enter your email", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        try {
+            Volunteer volunteer = authController.login(email, password);
+
+            if (volunteer != null && "admin".equalsIgnoreCase(volunteer.getRole())) {
+                AdminDashboardView dashboardView = new AdminDashboardView(volunteer);
+                dashboardView.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid credentials or not authorized as admin", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred during login", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
-
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter your password", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Volunteer admin =
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

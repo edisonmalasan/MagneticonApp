@@ -4,6 +4,8 @@
  */
 package views.admin;
 
+import models.Volunteer;
+
 /**
  *
  * @author Arthur
@@ -13,10 +15,11 @@ public class AdminDashboardView extends javax.swing.JFrame {
     /**
      * Creates new form AdminDashboardView
      */
-    public AdminDashboardView() {
+    public AdminDashboardView(Volunteer admin) {
         initComponents();
     }
 
+    public AdminDashboardView() {}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
