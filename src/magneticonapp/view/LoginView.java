@@ -155,7 +155,6 @@ public class LoginView extends javax.swing.JFrame {
         String email = textEmail.getText();
         String password = new String(jPasswordField1.getPassword()).trim();
 
-        // Delegate authentication to controller
         controller.handleLogin(email, password);
     }
 
