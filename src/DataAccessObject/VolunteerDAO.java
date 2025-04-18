@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VolunteerDAO {
 
@@ -56,5 +58,32 @@ public class VolunteerDAO {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Volunteer> getAllVolunteers() {
+        List<Volunteer> volunteers = new ArrayList<>();
+        String sql = "SELECT * FROM Volunteer";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                Volunteer volunteer = new Volunteer();
+                volunteer.setVolid(rs.getString("volid"));
+                volunteer.setFname(rs.getString("fname"));
+                volunteer.setLname(rs.getString("lname"));
+                volunteer.setEmail(rs.getString("email"));
+                volunteer.setPassword(rs.getString("password"));
+                volunteer.setRole(rs.getString("role"));
+
+                volunteers.add(volunteer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return volunteers;
     }
 }

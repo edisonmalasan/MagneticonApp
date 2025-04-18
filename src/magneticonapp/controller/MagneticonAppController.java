@@ -6,6 +6,8 @@ import models.Volunteer;
 import views.admin.AdminDashboardView;
 import views.volunteer.VolunteerDashboardView;
 
+import java.util.List;
+
 public class MagneticonAppController {
     private final AuthController authController;
     private LoginView loginView;
@@ -64,4 +66,5 @@ public class MagneticonAppController {
         loginView.clearFields();
         loginView.setVisible(true);
     }
+
 }
