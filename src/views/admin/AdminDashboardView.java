@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Arthur
+ * @author Edison
  */
 public class AdminDashboardView extends javax.swing.JFrame {
     private final MagneticonAppController controller;
